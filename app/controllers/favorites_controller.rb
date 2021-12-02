@@ -12,7 +12,7 @@ class FavoritesController < ApplicationController
     favorite = current_user.favorites.find_by(book_id: book.id)
     favorite.destroy
     redirect_to book_path(book)
-    
+
   end
   
 end
