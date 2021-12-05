@@ -2,15 +2,18 @@ class BookCommentsController < ApplicationController
   before_action :authenticate_user!
   
   def create
-    book = Book.find(params[:book_id])
-    comment = BookComment.new(book_comment_params)
+    @book = Book.find(params[:book_id])
+    @comment = BookComment.new(book_comment_params)
     comment.user_id = current_user.id
-    comment.book_id = book.id
+    comment.book_id = @book.id
     if comment.save
-    redirect_to book_path(book)
+    redirect_to book_path(@book.id)
     else
+      @new_book = Book.new
+      @book_comment = BookComment.new
       render 'books/show'
     end
+    
     
   end
   
