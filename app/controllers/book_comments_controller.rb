@@ -7,7 +7,7 @@ class BookCommentsController < ApplicationController
     comment.user_id = current_user.id
     comment.book_id = @book.id
     if comment.save
-    redirect_to book_path(@book.id), notice: 'コメントを投稿しました'
+    render :book_comments, notice: 'コメントを投稿しました'
     else
       @new_book = Book.new
       @book_comment = BookComment.new
@@ -22,7 +22,7 @@ class BookCommentsController < ApplicationController
     @book = Book.find(params[:book_id])
     book_comment = @book.book_comments.find(params[:id])
     book_comment.destroy
-    redirect_to book_path(params[:book_id]), alert: 'コメントを削除しました'
+    render :book_comments alert: 'コメントを削除しました'
   end
   
   private
