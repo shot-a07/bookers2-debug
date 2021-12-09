@@ -22,7 +22,7 @@ class BookCommentsController < ApplicationController
     @book = Book.find(params[:book_id])
     @book_comment = @book.book_comments.find(params[:id])
     @book_comment.destroy
-    render :book_comments, alert: 'コメントを削除しました'
+    #render :book_comments, alert: 'コメントを削除しました'
   end
   
   private
