@@ -3,11 +3,11 @@ class BookCommentsController < ApplicationController
   
   def create
     @book = Book.find(params[:book_id])
-    comment = BookComment.new(book_comment_params)
-    comment.user_id = current_user.id
-    comment.book_id = @book.id
-    if comment.save
-    render :book_comments, notice: 'コメントを投稿しました'
+    @book_comment = BookComment.new(book_comment_params)
+    @book_comment.user_id = current_user.id
+    @book_comment.book_id = @book.id
+    if @book_comment.save
+    flash[:notice]= 'コメントを投稿しました'
     else
       @new_book = Book.new
       @book_comment = BookComment.new
@@ -20,9 +20,9 @@ class BookCommentsController < ApplicationController
   
   def destroy
     @book = Book.find(params[:book_id])
-    book_comment = @book.book_comments.find(params[:id])
-    book_comment.destroy
-    render :book_comments alert: 'コメントを削除しました'
+    @book_comment = @book.book_comments.find(params[:id])
+    @book_comment.destroy
+    render :book_comments, alert: 'コメントを削除しました'
   end
   
   private
